@@ -1,199 +1,178 @@
-// ====== CARGA DE DATOS DESDE productos.json ======
-let productos = [];
-const grid = document.getElementById('product-grid');
-const pagination = document.getElementById('pagination');
-
-// Configuración
-const itemsPerPage = 6;
-let currentPage = 1;
-let currentFilters = { gender: 'all', category: 'all', search: '' };
-
-// Cargar productos desde JSON
-fetch('productos.json')
-  .then(response => {
-    if (!response.ok) throw new Error('No se pudo cargar productos.json');
-    return response.json();
-  })
-  .then(data => {
-    productos = data;
-    console.log('✅ Productos cargados:', productos);
-    renderProducts(1);
-  })
-  .catch(error => {
-    console.error('❌ Error al cargar productos:', error);
-    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #ff3333; font-size: 1.2rem;">
-      ❌ Error: No se pudieron cargar los productos.<br>
-      Asegúrate de que <strong>productos.json</strong> exista y tenga formato correcto.
-    </div>`;
-  });
-
-// ====== RENDERIZADO DE PRODUCTOS ======
-function renderProducts(page = 1) {
-  if (productos.length === 0) return;
-
-  // Filtrar productos
-  const filtered = productos.filter(p => {
-    const matchesGender = currentFilters.gender === 'all' || p.genero === currentFilters.gender;
-    const matchesCategory = currentFilters.category === 'all' || p.categoria === currentFilters.category;
-    const matchesSearch = !currentFilters.search || 
-      p.nombre.toLowerCase().includes(currentFilters.search.toLowerCase());
-    return matchesGender && matchesCategory && matchesSearch;
-  });
-
-  const totalPages = Math.ceil(filtered.length / itemsPerPage);
-  currentPage = page > totalPages ? totalPages : page;
-
-  // Limpiar grid
-  grid.innerHTML = '';
-
-  // Mostrar productos de la página actual
-  const start = (currentPage - 1) * itemsPerPage;
-  const toShow = filtered.slice(start, start + itemsPerPage);
-
-  toShow.forEach(prod => {
-    const card = document.createElement('div');
-    card.className = 'card revealable';
-    card.dataset.id = prod.id;
-    card.dataset.gender = prod.genero;
-    card.dataset.category = prod.categoria;
-    card.dataset.name = prod.nombre;
-
-    // Generar círculos de color
-    let colorOptions = '';
-    prod.colores.forEach(color => {
-      const imgName = prod.img.replace(/_[^_]+\.webp/, `_${color}.webp`);
-      colorOptions += `<span class="color-circle" style="background:${getColorHex(color)}" 
-                         onclick="changeColor('img-${prod.id}', '${imgName}')" 
-                         title="${color}"></span>`;
-    });
-
-    // Calcular descuento
-    const discount = Math.round((1 - prod.precio / prod.precioAnt) * 100);
-
-    card.innerHTML = `
-      <span class="ribbon">-${discount}%</span>
-      <img id="img-${prod.id}" src="images/${prod.img}" alt="${prod.nombre}">
-      <div class="card-info">
-        <h3>${prod.nombre}</h3>
-        <p class="price"><del>${prod.precioAnt}€</del> <ins>${prod.precio}€</ins></p>
-        <label for="size-${prod.id}" class="label-inline">Talla:</label>
-        <select id="size-${prod.id}">
-          <option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option>
-        </select>
-        <div class="color-options">${colorOptions}</div>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-
-  // Renderizar paginación
-  renderPagination(totalPages);
-}
-
-function renderPagination(totalPages) {
-  pagination.innerHTML = '';
-  if (totalPages <= 1) return;
-
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    btn.className = i === currentPage ? 'active' : '';
-    btn.addEventListener('click', () => renderProducts(i));
-    pagination.appendChild(btn);
-  }
-}
-
-// ====== FUNCIONES AUXILIARES ======
-function getColorHex(color) {
-  const colors = {
-    black: '#000', white: '#fff', gray: '#808080', darkgray: '#2F2F2F', lightgray: '#D3D3D3',
-    blue: '#0000ff', darkblue: '#00008B', navy: '#000080', lightblue: '#ADD8E6',
-    green: '#008000', darkgreen: '#006400', brown: '#A52A2A', burgundy: '#800000',
-    red: '#ff0000', purple: '#800080', pink: '#FFC0CB', cream: '#F5F5DC', apricot: '#FBCEB1'
-  };
-  return colors[color] || '#000';
-}
-
+// ====== CAMBIO DE COLOR DE IMAGEN ======
 function changeColor(imgId, newSrc) {
   const el = document.getElementById(imgId);
   if (!el) return;
   el.src = "images/" + newSrc;
 }
 
-// ====== FILTROS ======
-document.getElementById('searchInput').addEventListener('input', e => {
-  currentFilters.search = e.target.value;
-  currentPage = 1;
-  renderProducts(1);
-});
-
-document.querySelectorAll('.pill').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.dataset.filterType || btn.dataset.filter;
-    const value = btn.dataset.filterValue || btn.dataset.value;
-    
-    // Desactivar otros del mismo tipo
-    document.querySelectorAll(`.pill[data-filter-type="${filter}"], .pill[data-filter="${filter}"]`)
-      .forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    currentFilters[filter] = value;
-    currentPage = 1;
-    renderProducts(1);
-  });
-});
-
 // ====== MENÚ DESPLEGABLE ======
 function toggleDropdown(menuId, btnEl) {
   document.querySelectorAll('.dropdown').forEach(dd => {
     const content = dd.querySelector('.dropdown-content');
+    const btn = dd.querySelector('.dropbtn');
     if (content && content.id !== menuId) {
       dd.classList.remove('open');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     }
   });
 
   const parent = btnEl.closest('.dropdown');
-  parent.classList.toggle('open');
+  const content = document.getElementById(menuId);
+  if (!parent || !content) return;
+
+  const isOpen = parent.classList.toggle('open');
+  btnEl.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.dropdown')) {
-    document.querySelectorAll('.dropdown').forEach(dd => dd.classList.remove('open'));
+    document.querySelectorAll('.dropdown').forEach(dd => {
+      dd.classList.remove('open');
+      const btn = dd.querySelector('.dropbtn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
   }
 });
 
-// ====== OTROS ======
 document.addEventListener('DOMContentLoaded', () => {
-  // Partículas
-  if (typeof particlesJS !== 'undefined') {
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.45 },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.25, "width": 1 },
-        "move": { "enable": true, "speed": 2.4, "direction": "none", "straight": false, "out_mode": "out" }
-      },
-      "interactivity": {
-        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-        "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 3 } }
-      },
-      "retina_detect": true
+  document.querySelectorAll('.dropdown-content a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown').forEach(dd => dd.classList.remove('open'));
+      document.querySelectorAll('.dropbtn').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+    });
+  });
+});
+
+// ====== BUSCADOR + FILTROS ======
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const pills = document.querySelectorAll('.pill');
+  const cards = Array.from(document.querySelectorAll('.card'));
+
+  let currentGender = 'all';
+  let currentCategory = 'all';
+  let currentQuery = '';
+
+  function normalize(str) {
+    return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  }
+
+  function filterCards() {
+    const q = normalize(currentQuery);
+    cards.forEach(card => {
+      const gender = normalize(card.dataset.gender);
+      const category = normalize(card.dataset.category);
+      const name = normalize(card.dataset.name);
+      const genderOk = currentGender === 'all' || gender === currentGender;
+      const categoryOk = currentCategory === 'all' || category === category;
+      const searchOk = q === '' || name.includes(q) || gender.includes(q) || category.includes(q);
+      
+      card.style.display = (genderOk && categoryOk && searchOk) ? 'block' : 'none';
     });
   }
 
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting && e.target.classList.add('reveal'));
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.revealable').forEach(el => observer.observe(el));
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      currentQuery = e.target.value;
+      filterCards();
+    });
+  }
 
-  // Botón subir
-  const btnTop = document.getElementById('btnTop');
-  window.addEventListener('scroll', () => {
-    btnTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+  pills.forEach(p => {
+    p.addEventListener('click', () => {
+      const type = p.dataset.filterType;
+      const value = normalize(p.dataset.filterValue);
+      
+      document.querySelectorAll(`.pill[data-filter-type="${type}"]`).forEach(b => b.classList.remove('active'));
+      p.classList.add('active');
+      
+      if (type === 'gender') currentGender = value;
+      if (type === 'category') currentCategory = value;
+      
+      filterCards();
+    });
   });
-  btnTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Iniciar
+  filterCards();
+});
+
+// ====== SCROLL REVEAL ======
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.revealable');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('reveal'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el => io.observe(el));
+});
+
+// ====== BOTÓN SUBIR ======
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btnTop');
+  if (!btn) return;
+  
+  const onScroll = () => { btn.style.display = (window.scrollY > 400) ? 'block' : 'none'; };
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+  
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+});
+
+// ====== PARTICULAS ======
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof particlesJS === 'undefined') return;
+  
+  particlesJS("particles-js", {
+    "particles": {
+      "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+      "color": { "value": "#ffffff" },
+      "shape": { "type": "circle" },
+      "opacity": { "value": 0.45 },
+      "size": { "value": 3, "random": true },
+      "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.25, "width": 1 },
+      "move": { "enable": true, "speed": 2.4, "direction": "none", "straight": false, "out_mode": "out" }
+    },
+    "interactivity": {
+      "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+      "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 3 } }
+    },
+    "retina_detect": true
+  });
+});
+
+// ====== RIBBONS DE DESCUENTO ======
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card').forEach(card => {
+    const priceDel = card.querySelector('.price del');
+    const priceIns = card.querySelector('.price ins');
+    let ribbon = card.querySelector('.ribbon');
+    
+    if (!ribbon) {
+      ribbon = document.createElement('span');
+      ribbon.className = 'ribbon';
+      card.insertBefore(ribbon, card.firstChild);
+    }
+    
+    if (!priceDel || !priceIns) return;
+    
+    const original = parseFloat(priceDel.textContent.replace(/[€,]/g,'').trim());
+    const discounted = parseFloat(priceIns.textContent.replace(/[€,]/g,'').trim());
+    
+    if (isNaN(original) || isNaN(discounted) || original <= discounted) {
+      ribbon.style.display = 'none';
+    } else {
+      const percent = Math.round(((original - discounted)/original)*100);
+      ribbon.textContent = `-${percent}%`;
+      ribbon.style.display = 'inline-block';
+    }
+  });
 });
