@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nombre": "Chaquetón The North Face",
+    "precio": 65,
+    "precioAnt": 350,
+    "img": "northface_black.webp",
+    "genero": "hombre",
+    "categoria": "chaquetones",
+    "colores": ["black", "white", "green"]
+  },
+  {
+    "id": 2,
+    "nombre": "Camiseta Ralph Lauren",
+    "precio": 20,
+    "precioAnt": 80,
+    "img": "ralph_men_black.webp",
+    "genero": "hombre",
+    "categoria": "camisetas",
+    "colores": ["black", "white"]
+  }
+]
