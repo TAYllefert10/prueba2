@@ -10,12 +10,12 @@
     <!-- Open Graph -->
     <meta property="og:title" content="Catálogo de Ropa" />
     <meta property="og:description" content="Descubre ofertas increíbles en ropa de marca para hombre y mujer." />
-    <meta property="og:url" content="https://tayllefert10.github.io/prueba/" />
-    <meta property="og:image" content="https://tayllefert10.github.io/prueba/images/logo.png" />
+    <meta property="og:url" content="https://tayllefert10.github.io/prueba2/" />
+    <meta property="og:image" content="https://tayllefert10.github.io/prueba2/images/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Catálogo de Ropa" />
     <meta name="twitter:description" content="Descubre ofertas increíbles en ropa de marca para hombre y mujer." />
-    <meta name="twitter:image" content="https://tayllefert10.github.io/prueba/images/logo.png" />
+    <meta name="twitter:image" content="https://tayllefert10.github.io/prueba2/images/logo.png" />
 </head>
 <body>
     <div id="particles-js"></div>
@@ -47,6 +47,7 @@
     </header>
 
     <main>
+        <!-- Búsqueda y filtros -->
         <section id="buscador">
             <div class="filters-wrap">
                 <input id="searchInput" type="search" placeholder="Buscar por nombre o marca..." />
@@ -72,10 +73,12 @@
             </div>
         </section>
 
+        <!-- Contenedor de productos (¡ES LO QUE FALTABA!) -->
         <section id="catalogo">
             <div class="grid" id="product-grid"></div>
         </section>
 
+        <!-- Paginación -->
         <div class="pagination" id="pagination"></div>
     </main>
 
@@ -83,11 +86,5 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
-    <script>
-  fetch('productos.json')
-    .then(r => r.json())
-    .then(d => console.log('JSON cargado:', d))
-    .catch(e => console.error('Error JSON:', e));
-</script>
 </body>
 </html>
