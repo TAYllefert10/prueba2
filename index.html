@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Ropa</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Catálogo de Ropa" />
+    <meta property="og:description" content="Descubre ofertas increíbles en ropa de marca para hombre y mujer." />
+    <meta property="og:url" content="https://tayllefert10.github.io/prueba/" />
+    <meta property="og:image" content="https://tayllefert10.github.io/prueba/images/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Catálogo de Ropa" />
+    <meta name="twitter:description" content="Descubre ofertas increíbles en ropa de marca para hombre y mujer." />
+    <meta name="twitter:image" content="https://tayllefert10.github.io/prueba/images/logo.png" />
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <h1>Mi Catálogo</h1>
+        <nav>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown('hombre-menu', this)" aria-expanded="false">Hombre ▾</button>
+                <div id="hombre-menu" class="dropdown-content">
+                    <a href="#hombre-chaquetones">Chaquetones</a>
+                    <a href="#hombre-camisetas">Camisetas</a>
+                    <a href="#hombre-conjuntos">Conjuntos</a>
+                    <a href="#hombre-sudaderas">Sudaderas</a>
+                    <a href="#hombre-pantalones">Pantalones</a>
+                    <a href="#hombre-bolsos">Bolsos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown('mujer-menu', this)" aria-expanded="false">Mujer ▾</button>
+                <div id="mujer-menu" class="dropdown-content">
+                    <a href="#mujer-chaquetones">Chaquetones</a>
+                    <a href="#mujer-camisetas">Camisetas</a>
+                    <a href="#mujer-chaquetas">Chaquetas</a>
+                    <a href="#mujer-sudaderas">Sudaderas</a>
+                    <a href="#mujer-bolsos">Bolsos</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="buscador">
+            <div class="filters-wrap">
+                <input id="searchInput" type="search" placeholder="Buscar por nombre o marca..." />
+                <div class="quick-filters">
+                    <div class="filter-group">
+                        <span class="group-title">Género:</span>
+                        <button class="pill active" data-filter="gender" data-value="all">Todos</button>
+                        <button class="pill" data-filter="gender" data-value="hombre">Hombre</button>
+                        <button class="pill" data-filter="gender" data-value="mujer">Mujer</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="group-title">Categoría:</span>
+                        <button class="pill active" data-filter="category" data-value="all">Todas</button>
+                        <button class="pill" data-filter="category" data-value="chaquetones">Chaquetones</button>
+                        <button class="pill" data-filter="category" data-value="camisetas">Camisetas</button>
+                        <button class="pill" data-filter="category" data-value="conjuntos">Conjuntos</button>
+                        <button class="pill" data-filter="category" data-value="chaquetas">Chaquetas</button>
+                        <button class="pill" data-filter="category" data-value="sudaderas">Sudaderas</button>
+                        <button class="pill" data-filter="category" data-value="pantalones">Pantalones</button>
+                        <button class="pill" data-filter="category" data-value="bolsos">Bolsos</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogo">
+            <div class="grid" id="product-grid"></div>
+        </section>
+
+        <div class="pagination" id="pagination"></div>
+    </main>
+
+    <button id="btnTop">⬆</button>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
