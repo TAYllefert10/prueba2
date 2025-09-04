@@ -83,5 +83,11 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script>
+  fetch('productos.json')
+    .then(r => r.json())
+    .then(d => console.log('JSON cargado:', d))
+    .catch(e => console.error('Error JSON:', e));
+</script>
 </body>
 </html>
