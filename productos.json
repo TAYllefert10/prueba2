@@ -1,22 +1,42 @@
 [
   {
     "id": 1,
-    "nombre": "Chaquetón The North Face",
+    "nombre": "Chaquetón The North Face 700",
     "precio": 65,
     "precioAnt": 350,
     "img": "northface_black.webp",
     "genero": "hombre",
     "categoria": "chaquetones",
-    "colores": ["black", "white", "green"]
+    "colores": ["black", "white", "green", "gray", "purple", "darkblue", "burgundy", "brown", "cream"]
   },
   {
     "id": 2,
-    "nombre": "Camiseta Ralph Lauren",
+    "nombre": "Camiseta Hombre Ralph Lauren",
     "precio": 20,
     "precioAnt": 80,
     "img": "ralph_men_black.webp",
     "genero": "hombre",
     "categoria": "camisetas",
-    "colores": ["black", "white"]
+    "colores": ["black", "white", "darkblue", "gray", "lightblue"]
+  },
+  {
+    "id": 3,
+    "nombre": "Chaquetón The North Face corto",
+    "precio": 60,
+    "precioAnt": 280,
+    "img": "w_northface_black.webp",
+    "genero": "mujer",
+    "categoria": "chaquetones",
+    "colores": ["black", "pink", "white"]
+  },
+  {
+    "id": 4,
+    "nombre": "Bolso Guess",
+    "precio": 62.5,
+    "precioAnt": 135,
+    "img": "guess_black.webp",
+    "genero": "mujer",
+    "categoria": "bolsos",
+    "colores": ["black", "blue", "pink", "white"]
   }
 ]
