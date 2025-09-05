@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
+ 
 [id] { scroll-margin-top: 90px; }
 
 h1, h2, h3 { font-weight: 700; }
