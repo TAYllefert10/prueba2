@@ -49,7 +49,7 @@ function renderProducts(page = 1) {
 
   toShow.forEach(prod => {
     const card = document.createElement('div');
-    card.className = 'card revealable';
+    card.className = 'card';
     card.dataset.id = prod.id;
     card.dataset.gender = prod.genero;
     card.dataset.category = prod.categoria;
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => e.isIntersecting && e.target.classList.add('reveal'));
   }, { threshold: 0.1 });
-  document.querySelectorAll('.revealable').forEach(el => observer.observe(el));
+  document.querySelectorAll('.card').forEach(el => observer.observe(el));
 
   const btnTop = document.getElementById('btnTop');
   window.addEventListener('scroll', () => {
