@@ -1,17 +1,15 @@
-// ====== CARGA DE DATOS DESDE productos.json ======
+// ====== CARGAR PRODUCTOS DESDE JSON ======
 let productos = [];
 const grid = document.getElementById('product-grid');
 const pagination = document.getElementById('pagination');
 
-// Configuración
-const itemsPerPage = 6;
 let currentPage = 1;
+const itemsPerPage = 6;
 let currentFilters = { gender: 'all', category: 'all', search: '' };
 
-// Cargar productos desde JSON
 fetch('productos.json')
   .then(response => {
-    if (!response.ok) throw new Error('No se pudo cargar productos.json');
+    if (!response.ok) throw new Error('No se encontró productos.json');
     return response.json();
   })
   .then(data => {
@@ -20,18 +18,19 @@ fetch('productos.json')
     renderProducts(1);
   })
   .catch(error => {
-    console.error('❌ Error al cargar productos:', error);
-    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #ff3333; font-size: 1.2rem;">
-      ❌ Error: No se pudieron cargar los productos.<br>
-      Asegúrate de que <strong>productos.json</strong> exista y tenga formato correcto.
-    </div>`;
+    console.error('❌ Error:', error);
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; color: #ff3333; padding: 2rem;">
+        ❌ Error: ${error.message}<br>
+        Asegúrate de que <strong>productos.json</strong> exista.
+      </div>
+    `;
   });
 
-// ====== RENDERIZADO DE PRODUCTOS ======
+// ====== RENDERIZAR PRODUCTOS ======
 function renderProducts(page = 1) {
-  if (productos.length === 0) return;
+  if (!productos || productos.length === 0) return;
 
-  // Filtrar productos
   const filtered = productos.filter(p => {
     const matchesGender = currentFilters.gender === 'all' || p.genero === currentFilters.gender;
     const matchesCategory = currentFilters.category === 'all' || p.categoria === currentFilters.category;
@@ -43,10 +42,8 @@ function renderProducts(page = 1) {
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   currentPage = page > totalPages ? totalPages : page;
 
-  // Limpiar grid
   grid.innerHTML = '';
 
-  // Mostrar productos de la página actual
   const start = (currentPage - 1) * itemsPerPage;
   const toShow = filtered.slice(start, start + itemsPerPage);
 
@@ -58,16 +55,18 @@ function renderProducts(page = 1) {
     card.dataset.category = prod.categoria;
     card.dataset.name = prod.nombre;
 
-    // Generar círculos de color
     let colorOptions = '';
-    prod.colores.forEach(color => {
+    (prod.colores || ['black']).forEach(color => {
       const imgName = prod.img.replace(/_[^_]+\.webp/, `_${color}.webp`);
-      colorOptions += `<span class="color-circle" style="background:${getColorHex(color)}" 
-                         onclick="changeColor('img-${prod.id}', '${imgName}')" 
-                         title="${color}"></span>`;
+      colorOptions += `
+        <span 
+          class="color-circle" 
+          style="background:${getColorHex(color)}" 
+          onclick="changeColor('img-${prod.id}', '${imgName}')" 
+          title="${color}">
+        </span>`;
     });
 
-    // Calcular descuento
     const discount = Math.round((1 - prod.precio / prod.precioAnt) * 100);
 
     card.innerHTML = `
@@ -86,7 +85,6 @@ function renderProducts(page = 1) {
     grid.appendChild(card);
   });
 
-  // Renderizar paginación
   renderPagination(totalPages);
 }
 
@@ -114,11 +112,11 @@ function getColorHex(color) {
   return colors[color] || '#000';
 }
 
-function changeColor(imgId, newSrc) {
+window.changeColor = function(imgId, newSrc) {
   const el = document.getElementById(imgId);
   if (!el) return;
   el.src = "images/" + newSrc;
-}
+};
 
 // ====== FILTROS ======
 document.getElementById('searchInput').addEventListener('input', e => {
@@ -129,12 +127,10 @@ document.getElementById('searchInput').addEventListener('input', e => {
 
 document.querySelectorAll('.pill').forEach(btn => {
   btn.addEventListener('click', () => {
-    const filter = btn.dataset.filterType || btn.dataset.filter;
-    const value = btn.dataset.filterValue || btn.dataset.value;
+    const filter = btn.dataset.filter;
+    const value = btn.dataset.value;
     
-    // Desactivar otros del mismo tipo
-    document.querySelectorAll(`.pill[data-filter-type="${filter}"], .pill[data-filter="${filter}"]`)
-      .forEach(b => b.classList.remove('active'));
+    document.querySelectorAll(`.pill[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     
     currentFilters[filter] = value;
@@ -144,7 +140,7 @@ document.querySelectorAll('.pill').forEach(btn => {
 });
 
 // ====== MENÚ DESPLEGABLE ======
-function toggleDropdown(menuId, btnEl) {
+window.toggleDropdown = function(menuId, btnEl) {
   document.querySelectorAll('.dropdown').forEach(dd => {
     const content = dd.querySelector('.dropdown-content');
     if (content && content.id !== menuId) {
@@ -154,7 +150,7 @@ function toggleDropdown(menuId, btnEl) {
 
   const parent = btnEl.closest('.dropdown');
   parent.classList.toggle('open');
-}
+};
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.dropdown')) {
@@ -164,7 +160,6 @@ document.addEventListener('click', (e) => {
 
 // ====== OTROS ======
 document.addEventListener('DOMContentLoaded', () => {
-  // Partículas
   if (typeof particlesJS !== 'undefined') {
     particlesJS("particles-js", {
       "particles": {
@@ -184,13 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => e.isIntersecting && e.target.classList.add('reveal'));
   }, { threshold: 0.1 });
   document.querySelectorAll('.revealable').forEach(el => observer.observe(el));
 
-  // Botón subir
   const btnTop = document.getElementById('btnTop');
   window.addEventListener('scroll', () => {
     btnTop.style.display = window.scrollY > 400 ? 'block' : 'none';
