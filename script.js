@@ -30,6 +30,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("productos.json");
     const productos = await response.json();
 
+    // Función para generar un ID seguro
+    function generarId(nombre) {
+      return "img-" + nombre
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "-")  // Reemplaza todo lo que no sea letra o número por "-"
+        .replace(/-+/g, "-")          // Elimina múltiples guiones seguidos
+        .replace(/^-|-$/g, "");       // Elimina guiones al inicio o final
+    }
+
     const productosPorGenero = {};
 
     productos.forEach(prod => {
@@ -71,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.className = "card";
 
           const imgPath = `https://tayllefert10.github.io/prueba/images/${producto.colores[0].imagen}`;
-          const imgId = `img-${producto.nombre.replace(/\s+/g, '-').toLowerCase()}`;
+          const imgId = generarId(producto.nombre); // ID seguro
 
           const colorOptions = producto.colores.map((color, index) => {
             const isActive = index === 0 ? "active" : "";
@@ -101,12 +110,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `;
 
+          // Asignar evento después de insertar el HTML
           const mainImg = card.querySelector(`#${imgId}`);
           card.querySelectorAll(".color-option").forEach(option => {
             option.addEventListener("click", () => {
               const newImg = option.getAttribute("data-img");
               mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
               
+              // Actualizar estado activo
               option.parentNode.querySelectorAll(".color-option").forEach(el => {
                 el.classList.remove("active");
               });
