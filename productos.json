@@ -89,6 +89,20 @@
   },
   {
     "genero": "Hombre",
+    "categoria": "Camisetas",
+    "nombre": "Camiseta Hombre The North Face",
+    "descripcion": "Logo bordado en el pecho y en la espalda",
+    "precioOriginal": 45,
+    "precioRebajado": 20,
+    "colores": [
+      { "nombre": "Negro", "imagen": "tnf_shirt_black.webp" },
+      { "nombre": "Gris oscuro", "imagen": "tnf_shirt_darkgray.webp" },
+      { "nombre": "Azul marino", "imagen": "tnf_shirt_navy.webp" },
+      { "nombre": "Blanco", "imagen": "tnf_shirt_white.webp" }
+    ]
+  },
+  {
+    "genero": "Hombre",
     "categoria": "Conjuntos",
     "nombre": "Conjunto corto Adidas",
     "precioOriginal": 80,
@@ -190,6 +204,26 @@
   },
   {
     "genero": "Mujer",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Nike",
+    "precioOriginal": 200,
+    "precioRebajado": 75,
+    "colores": [
+      { "nombre": "Negro", "imagen": "nike_black.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Adidas Originals x Balenciaga",
+    "precioOriginal": 250,
+    "precioRebajado": 70,
+    "colores": [
+      { "nombre": "Negro", "imagen": "chaqueton_adidas_original_black.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
     "categoria": "Camisetas",
     "nombre": "Camiseta Mujer Ralph Lauren",
     "precioOriginal": 80,
@@ -198,6 +232,100 @@
       { "nombre": "Negro", "imagen": "ralph_women_black.webp" },
       { "nombre": "Gris", "imagen": "ralph_women_gray.webp" },
       { "nombre": "Blanco", "imagen": "ralph_women_white.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Bolsos",
+    "nombre": "Bolso Coach",
+    "precioOriginal": 120,
+    "precioRebajado": 45,
+    "colores": [
+      { "nombre": "Negro", "imagen": "bolso_coach_black.webp" },
+      { "nombre": "Negro", "imagen": "bolso_coach.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Bolsos",
+    "nombre": "Bolso Zadig & Voltaire",
+    "precioOriginal": 150,
+    "precioRebajado": 55,
+    "colores": [
+      { "nombre": "Negro", "imagen": "bolso_zadig_black.webp" },
+      { "nombre": "Marrón", "imagen": "bolso_zadig_brown.webp" },
+      { "nombre": "Verde", "imagen": "bolso_zadig_green.webp" },
+      { "nombre": "Rojo", "imagen": "bolso_zadig_red.webp" },
+      { "nombre": "Blanco", "imagen": "bolso_zadig_white.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Bolsos",
+    "nombre": "Monedero Zadig",
+    "precioOriginal": 40,
+    "precioRebajado": 15,
+    "colores": [
+      { "nombre": "Negro", "imagen": "Monedero_zadig_black.webp" },
+      { "nombre": "Negro", "imagen": "Monedero_zadig_black2.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Chaquetas",
+    "nombre": "Chaqueta Ami Paris",
+    "precioOriginal": 220,
+    "precioRebajado": 65,
+    "colores": [
+      { "nombre": "Marrón", "imagen": "chaqueta_ami_paris_brown.webp" },
+      { "nombre": "Gris", "imagen": "chaqueta_ami_paris_grey.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Chaquetas",
+    "nombre": "Chaqueta Miu Miu",
+    "precioOriginal": 280,
+    "precioRebajado": 85,
+    "colores": [
+      { "nombre": "Blanco", "imagen": "chaqueta_miumiu_white.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Top",
+    "nombre": "Top Ami Paris",
+    "precioOriginal": 75,
+    "precioRebajado": 25,
+    "colores": [
+      { "nombre": "Negro", "imagen": "top_ami_paris_black.webp" },
+      { "nombre": "Azul", "imagen": "top_ami_paris_blue.webp" },
+      { "nombre": "Marrón", "imagen": "top_ami_paris_brown.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Sudaderas",
+    "nombre": "Sudadera Alo Yoga",
+    "precioOriginal": 95,
+    "precioRebajado": 35,
+    "colores": [
+      { "nombre": "Negro", "imagen": "sudadera_alo_black.webp" },
+      { "nombre": "Azul", "imagen": "sudadera_alo_blue.webp" },
+      { "nombre": "Gris", "imagen": "sudadera_alo_grey.webp" }
+    ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "bolsos",
+    "nombre": "Bolso Guess",
+    "precioOriginal": 110,
+    "precioRebajado": 40,
+    "colores": [
+      { "nombre": "Negro", "imagen": "guess_black.webp" },
+      { "nombre": "Azul", "imagen": "guess_blue.webp" },
+      { "nombre": "Rosa", "imagen": "guess_pink.webp" },
+      { "nombre": "Blanco", "imagen": "guess_white.webp" }
     ]
   }
 ]
