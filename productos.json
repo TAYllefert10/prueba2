@@ -3,181 +3,201 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face 700",
-    "color": "Negro",
     "precioOriginal": 350,
     "precioRebajado": 65,
-    "imagen": "northface_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "northface_black.webp" },
+      { "nombre": "Marrón", "imagen": "northface_brown.webp" },
+      { "nombre": "Burdeos", "imagen": "northface_burgundy.webp" },
+      { "nombre": "Crema", "imagen": "northface_cream.webp" },
+      { "nombre": "Azul oscuro", "imagen": "northface_darkblue.webp" },
+      { "nombre": "Gris", "imagen": "northface_gray.webp" },
+      { "nombre": "Verde", "imagen": "northface_green.webp" },
+      { "nombre": "Morado", "imagen": "northface_purple.webp" },
+      { "nombre": "Blanco", "imagen": "northface_white.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón sin mangas Ralph Lauren",
-    "color": "Negro",
     "precioOriginal": 399.99,
     "precioRebajado": 70,
-    "imagen": "ralph_chaqueton_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "ralph_chaqueton_black.webp" },
+      { "nombre": "Verde", "imagen": "ralph_chaqueton_green.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Nike",
-    "color": "Negro",
     "precioOriginal": 200,
     "precioRebajado": 75,
-    "imagen": "nike_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "nike_black.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Abrigo North Face",
-    "color": "Negro",
     "precioOriginal": 300,
     "precioRebajado": 72,
-    "imagen": "abrigo_northface_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "abrigo_northface_black.webp" },
+      { "nombre": "Marrón", "imagen": "abrigo_northface_brown.webp" },
+      { "nombre": "Verde", "imagen": "abrigo_northface_green.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Adidas Originals x Balenciaga",
-    "color": "Negro",
     "precioOriginal": 250,
     "precioRebajado": 70,
-    "imagen": "chaqueton_adidas_original_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "chaqueton_adidas_original_black.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Camisetas",
     "nombre": "Camiseta Hombre Ralph Lauren",
-    "color": "Negro",
     "precioOriginal": 80,
     "precioRebajado": 20,
-    "imagen": "ralph_men_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "ralph_men_black.webp" },
+      { "nombre": "Azul oscuro", "imagen": "ralph_men_darkblue.webp" },
+      { "nombre": "Gris", "imagen": "ralph_men_gray.webp" },
+      { "nombre": "Azul claro", "imagen": "ralph_men_lightblue.webp" },
+      { "nombre": "Blanco", "imagen": "ralph_men_white.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Camisetas",
     "nombre": "Camiseta Adidas Originals Fútbol",
-    "color": "Negro",
+    "descripcion": "Logo bordado en el pecho y en la espalda",
     "precioOriginal": 60,
     "precioRebajado": 19,
-    "imagen": "adidas_originals_futbol.webp"
-  },
-  {
-    "genero": "Hombre",
-    "categoria": "Camisetas",
-    "nombre": "Camiseta Hombre The North Face",
-    "descripcion": "Logo bordado en el pecho y en la espalda",
-    "color": "Negro",
-    "precioOriginal": 45,
-    "precioRebajado": 20,
-    "imagen": "tnf_shirt_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "adidas_originals_futbol_black.webp" },
+      { "nombre": "Azul", "imagen": "adidas_originals_futbol_blue.webp" },
+      { "nombre": "Negro", "imagen": "adidas_originals_futbol.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Conjuntos",
     "nombre": "Conjunto corto Adidas",
-    "color": "Negro",
     "precioOriginal": 80,
     "precioRebajado": 29,
-    "imagen": "conjunto_adidas_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "conjunto_adidas_black.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Sudaderas",
     "nombre": "Sudadera Hombre Stone Island",
-    "color": "Gris claro",
     "precioOriginal": 310,
     "precioRebajado": 55,
-    "imagen": "stone_island_lightgray.webp"
+    "colores": [
+      { "nombre": "Amarillo", "imagen": "stone_island_apricot.webp" },
+      { "nombre": "Negro", "imagen": "stone_island_black.webp" },
+      { "nombre": "Gris oscuro", "imagen": "stone_island_darkgray.webp" },
+      { "nombre": "Gris claro", "imagen": "stone_island_lightgray.webp" },
+      { "nombre": "Blanco", "imagen": "stone_island_white.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Calzona The North Face",
-    "color": "Negro",
     "precioOriginal": 45,
     "precioRebajado": 20,
-    "imagen": "tnf_pants_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "tnf_pants_black.webp" },
+      { "nombre": "Gris", "imagen": "tnf_pants_gray.webp" },
+      { "nombre": "Blanco", "imagen": "tnf_pants_white.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Bermudas Ralph Lauren",
-    "color": "Beige",
     "precioOriginal": 95,
     "precioRebajado": 34,
-    "imagen": "bermudas_ralph_lauren.webp"
+    "colores": [
+      { "nombre": "Beige", "imagen": "bermudas_ralph_lauren.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Calzonas Adidas Originals",
-    "color": "Negro",
     "precioOriginal": 75,
     "precioRebajado": 34,
-    "imagen": "calzonas_adidas_original_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "calzonas_adidas_original_black.webp" },
+      { "nombre": "Blanco", "imagen": "calzonas_adidas_original_white.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Bandolera adidas",
-    "color": "Negro",
     "precioOriginal": 45,
     "precioRebajado": 17,
-    "imagen": "bandolera_adidas.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "bandolera_adidas.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Bandolera Adidas Originals",
-    "color": "Negro",
     "precioOriginal": 55,
     "precioRebajado": 19,
-    "imagen": "bandolera_adidas_originals.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "bandolera_adidas_originals.webp" }
+    ]
   },
   {
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Riñonera Supreme",
-    "color": "Negro",
     "precioOriginal": 60,
     "precioRebajado": 19,
-    "imagen": "rinonera_supreme_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "rinonera_supreme_black.webp" },
+      { "nombre": "Marrón", "imagen": "rinonera_supreme_brown.webp" },
+      { "nombre": "Verde", "imagen": "rinonera_supreme_green.webp" }
+    ]
   },
   {
     "genero": "Mujer",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face corto",
-    "color": "Negro",
     "precioOriginal": 280,
     "precioRebajado": 60,
-    "imagen": "w_northface_black.webp"
-  },
-  {
-    "genero": "Mujer",
-    "categoria": "Chaquetones",
-    "nombre": "Chaquetón Nike",
-    "color": "Negro",
-    "precioOriginal": 200,
-    "precioRebajado": 75,
-    "imagen": "nike_black.webp"
-  },
-  {
-    "genero": "Mujer",
-    "categoria": "Chaquetones",
-    "nombre": "Chaquetón Adidas Originals x Balenciaga",
-    "color": "Negro",
-    "precioOriginal": 250,
-    "precioRebajado": 70,
-    "imagen": "chaqueton_adidas_original_black.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "w_northface_black.webp" },
+      { "nombre": "Rosa", "imagen": "w_northface_pink.webp" },
+      { "nombre": "Blanco", "imagen": "w_northface_white.webp" }
+    ]
   },
   {
     "genero": "Mujer",
     "categoria": "Camisetas",
     "nombre": "Camiseta Mujer Ralph Lauren",
-    "color": "Blanco",
     "precioOriginal": 80,
     "precioRebajado": 20,
-    "imagen": "ralph_women_white.webp"
+    "colores": [
+      { "nombre": "Negro", "imagen": "ralph_women_black.webp" },
+      { "nombre": "Gris", "imagen": "ralph_women_gray.webp" },
+      { "nombre": "Blanco", "imagen": "ralph_women_white.webp" }
+    ]
   }
 ]
