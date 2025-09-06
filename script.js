@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("productos.json");
     const productos = await response.json();
 
-    // Aseguramos que los precios sean números
+    // Calcular descuentos automáticamente
     productos.forEach(prod => {
       prod.precioOriginal = parseFloat(prod.precioOriginal) || 0;
       prod.precioRebajado = parseFloat(prod.precioRebajado) || 0;
-      // Calcular descuento automáticamente
       prod.descuento = Math.round(((prod.precioOriginal - prod.precioRebajado) / prod.precioOriginal) * 100);
     });
 
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorGenero[prod.genero][prod.categoria].push(prod);
     });
 
-    // Generar el catálogo
+    // Generar catálogo
     for (const genero in productosPorGenero) {
       const seccionDiv = document.createElement("div");
       seccionDiv.className = "seccion";
@@ -56,19 +55,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.innerHTML = `
             <div style="position: relative;">
               <span class="discount-badge">-${prod.descuento}%</span>
-              <img src="${imgPath}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible'">
+              <div class="img-container">
+                <img src="${imgPath}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'">
+              </div>
             </div>
             <div class="card-content">
               <h3 class="card-title">${prod.nombre}</h3>
+              <p class="color-info">Color: ${prod.color}</p>
               ${prod.descripcion ? `<p class="card-description">${prod.descripcion}</p>` : ''}
               <div class="price-container">
                 <span class="price-original">${prod.precioOriginal.toFixed(2)}€</span>
                 <span class="price-discount">${prod.precioRebajado.toFixed(2)}€</span>
               </div>
-              <a href="https://wa.me/34600000000?text=Hola,%20quiero%20pedir%20el%20producto:%20${encodeURIComponent(prod.nombre)}%20-%20${prod.precioRebajado}€" 
-                 class="btn-wsp" target="_blank">
-                📱 Pedir por WhatsApp
-              </a>
             </div>
           `;
 
