@@ -5,7 +5,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("productos.json");
     const productos = await response.json();
 
-    // Agrupar por género y luego por categoría
+    // Aseguramos que los precios sean números
+    productos.forEach(prod => {
+      prod.precioOriginal = parseFloat(prod.precioOriginal) || 0;
+      prod.precioRebajado = parseFloat(prod.precioRebajado) || 0;
+      // Calcular descuento automáticamente
+      prod.descuento = Math.round(((prod.precioOriginal - prod.precioRebajado) / prod.precioOriginal) * 100);
+    });
+
+    // Agrupar por género y categoría
     const productosPorGenero = {};
 
     productos.forEach(prod => {
@@ -46,16 +54,21 @@ document.addEventListener("DOMContentLoaded", async () => {
           const imgPath = `https://tayllefert10.github.io/prueba/images/${prod.imagen}`;
 
           card.innerHTML = `
-            <div class="discount-badge">-${prod.descuento}%</div>
-            <img src="${imgPath}" alt="${prod.nombre}">
+            <div style="position: relative;">
+              <span class="discount-badge">-${prod.descuento}%</span>
+              <img src="${imgPath}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible'">
+            </div>
             <div class="card-content">
               <h3 class="card-title">${prod.nombre}</h3>
               ${prod.descripcion ? `<p class="card-description">${prod.descripcion}</p>` : ''}
               <div class="price-container">
-                <span class="price-original">${prod.precioOriginal}€</span>
-                <span class="price-discount">${prod.precioRebajado}€</span>
+                <span class="price-original">${prod.precioOriginal.toFixed(2)}€</span>
+                <span class="price-discount">${prod.precioRebajado.toFixed(2)}€</span>
               </div>
-              <button class="btn">🛒 Añadir al carrito</button>
+              <a href="https://wa.me/34600000000?text=Hola,%20quiero%20pedir%20el%20producto:%20${encodeURIComponent(prod.nombre)}%20-%20${prod.precioRebajado}€" 
+                 class="btn-wsp" target="_blank">
+                📱 Pedir por WhatsApp
+              </a>
             </div>
           `;
 
