@@ -3,6 +3,7 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face 700",
+    "color": "Negro",
     "precioOriginal": 350,
     "precioRebajado": 65,
     "imagen": "northface_black.webp"
@@ -11,6 +12,7 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón sin mangas Ralph Lauren",
+    "color": "Negro",
     "precioOriginal": 399.99,
     "precioRebajado": 70,
     "imagen": "ralph_chaqueton_black.webp"
@@ -19,6 +21,7 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Nike",
+    "color": "Negro",
     "precioOriginal": 200,
     "precioRebajado": 75,
     "imagen": "nike_black.webp"
@@ -27,6 +30,7 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Abrigo North Face",
+    "color": "Negro",
     "precioOriginal": 300,
     "precioRebajado": 72,
     "imagen": "abrigo_northface_black.webp"
@@ -35,6 +39,7 @@
     "genero": "Hombre",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Adidas Originals x Balenciaga",
+    "color": "Negro",
     "precioOriginal": 250,
     "precioRebajado": 70,
     "imagen": "chaqueton_adidas_original_black.webp"
@@ -43,6 +48,7 @@
     "genero": "Hombre",
     "categoria": "Camisetas",
     "nombre": "Camiseta Hombre Ralph Lauren",
+    "color": "Negro",
     "precioOriginal": 80,
     "precioRebajado": 20,
     "imagen": "ralph_men_black.webp"
@@ -51,6 +57,7 @@
     "genero": "Hombre",
     "categoria": "Camisetas",
     "nombre": "Camiseta Adidas Originals Fútbol",
+    "color": "Negro",
     "precioOriginal": 60,
     "precioRebajado": 19,
     "imagen": "adidas_originals_futbol.webp"
@@ -60,6 +67,7 @@
     "categoria": "Camisetas",
     "nombre": "Camiseta Hombre The North Face",
     "descripcion": "Logo bordado en el pecho y en la espalda",
+    "color": "Negro",
     "precioOriginal": 45,
     "precioRebajado": 20,
     "imagen": "tnf_shirt_black.webp"
@@ -68,6 +76,7 @@
     "genero": "Hombre",
     "categoria": "Conjuntos",
     "nombre": "Conjunto corto Adidas",
+    "color": "Negro",
     "precioOriginal": 80,
     "precioRebajado": 29,
     "imagen": "conjunto_adidas_black.webp"
@@ -76,6 +85,7 @@
     "genero": "Hombre",
     "categoria": "Sudaderas",
     "nombre": "Sudadera Hombre Stone Island",
+    "color": "Gris claro",
     "precioOriginal": 310,
     "precioRebajado": 55,
     "imagen": "stone_island_lightgray.webp"
@@ -84,6 +94,7 @@
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Calzona The North Face",
+    "color": "Negro",
     "precioOriginal": 45,
     "precioRebajado": 20,
     "imagen": "tnf_pants_black.webp"
@@ -92,6 +103,7 @@
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Bermudas Ralph Lauren",
+    "color": "Beige",
     "precioOriginal": 95,
     "precioRebajado": 34,
     "imagen": "bermudas_ralph_lauren.webp"
@@ -100,6 +112,7 @@
     "genero": "Hombre",
     "categoria": "Pantalones",
     "nombre": "Calzonas Adidas Originals",
+    "color": "Negro",
     "precioOriginal": 75,
     "precioRebajado": 34,
     "imagen": "calzonas_adidas_original_black.webp"
@@ -108,6 +121,7 @@
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Bandolera adidas",
+    "color": "Negro",
     "precioOriginal": 45,
     "precioRebajado": 17,
     "imagen": "bandolera_adidas.webp"
@@ -116,6 +130,7 @@
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Bandolera Adidas Originals",
+    "color": "Negro",
     "precioOriginal": 55,
     "precioRebajado": 19,
     "imagen": "bandolera_adidas_originals.webp"
@@ -124,6 +139,7 @@
     "genero": "Hombre",
     "categoria": "Bolsos",
     "nombre": "Riñonera Supreme",
+    "color": "Negro",
     "precioOriginal": 60,
     "precioRebajado": 19,
     "imagen": "rinonera_supreme_black.webp"
@@ -132,6 +148,7 @@
     "genero": "Mujer",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face corto",
+    "color": "Negro",
     "precioOriginal": 280,
     "precioRebajado": 60,
     "imagen": "w_northface_black.webp"
@@ -140,6 +157,7 @@
     "genero": "Mujer",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Nike",
+    "color": "Negro",
     "precioOriginal": 200,
     "precioRebajado": 75,
     "imagen": "nike_black.webp"
@@ -148,6 +166,7 @@
     "genero": "Mujer",
     "categoria": "Chaquetones",
     "nombre": "Chaquetón Adidas Originals x Balenciaga",
+    "color": "Negro",
     "precioOriginal": 250,
     "precioRebajado": 70,
     "imagen": "chaqueton_adidas_original_black.webp"
@@ -156,6 +175,7 @@
     "genero": "Mujer",
     "categoria": "Camisetas",
     "nombre": "Camiseta Mujer Ralph Lauren",
+    "color": "Blanco",
     "precioOriginal": 80,
     "precioRebajado": 20,
     "imagen": "ralph_women_white.webp"
