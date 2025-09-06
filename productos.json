@@ -1,45 +1,183 @@
 [
   {
-    "id": 1,
+    "genero": "Hombre",
+    "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face 700",
-    "precio": 65,
-    "precioAnt": 350,
-    "img": "northface_black.webp",
-    "genero": "hombre",
-    "categoria": "chaquetones",
-    "colores": ["black", "white", "green", "gray", "purple", "darkblue", "burgundy", "brown", "cream"]
+    "descuento": 81,
+    "precioOriginal": 350,
+    "precioRebajado": 65,
+    "imagen": "northface_black.webp"
   },
   {
-    "id": 2,
+    "genero": "Hombre",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón sin mangas Ralph Lauren",
+    "descuento": 82,
+    "precioOriginal": 399.99,
+    "precioRebajado": 70,
+    "imagen": "ralph_chaqueton_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Nike",
+    "descuento": 63,
+    "precioOriginal": 200,
+    "precioRebajado": 75,
+    "imagen": "nike_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Chaquetones",
+    "nombre": "Abrigo North Face",
+    "descuento": 76,
+    "precioOriginal": 300,
+    "precioRebajado": 72,
+    "imagen": "abrigo_northface_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Adidas Originals x Balenciaga",
+    "descuento": 72,
+    "precioOriginal": 250,
+    "precioRebajado": 70,
+    "imagen": "chaqueton_adidas_original_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Camisetas",
     "nombre": "Camiseta Hombre Ralph Lauren",
-    "precio": 20,
-    "precioAnt": 80,
-    "img": "ralph_men_black.webp",
-    "genero": "hombre",
-    "categoria": "camisetas",
-    "colores": ["black", "white", "darkblue", "gray", "lightblue"]
+    "descuento": 75,
+    "precioOriginal": 80,
+    "precioRebajado": 20,
+    "imagen": "ralph_men_black.webp"
   },
   {
-    "id": 3,
+    "genero": "Hombre",
+    "categoria": "Camisetas",
+    "nombre": "Camiseta Adidas Originals Fútbol",
+    "descuento": 68,
+    "precioOriginal": 60,
+    "precioRebajado": 19,
+    "imagen": "adidas_originals_futbol.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Camisetas",
+    "nombre": "Camiseta Hombre The North Face",
+    "descripcion": "Logo bordado en el pecho y en la espalda",
+    "descuento": 56,
+    "precioOriginal": 45,
+    "precioRebajado": 20,
+    "imagen": "tnf_shirt_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Conjuntos",
+    "nombre": "Conjunto corto Adidas",
+    "descuento": 64,
+    "precioOriginal": 80,
+    "precioRebajado": 29,
+    "imagen": "conjunto_adidas_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Sudaderas",
+    "nombre": "Sudadera Hombre Stone Island",
+    "descuento": 82,
+    "precioOriginal": 310,
+    "precioRebajado": 55,
+    "imagen": "stone_island_lightgray.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Pantalones",
+    "nombre": "Calzona The North Face",
+    "descuento": 56,
+    "precioOriginal": 45,
+    "precioRebajado": 20,
+    "imagen": "tnf_pants_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Pantalones",
+    "nombre": "Bermudas Ralph Lauren",
+    "descuento": 64,
+    "precioOriginal": 95,
+    "precioRebajado": 34,
+    "imagen": "bermudas_ralph_lauren.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Pantalones",
+    "nombre": "Calzonas Adidas Originals",
+    "descuento": 55,
+    "precioOriginal": 75,
+    "precioRebajado": 34,
+    "imagen": "calzonas_adidas_original_black.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Bolsos",
+    "nombre": "Bandolera adidas",
+    "descuento": 62,
+    "precioOriginal": 45,
+    "precioRebajado": 17,
+    "imagen": "bandolera_adidas.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Bolsos",
+    "nombre": "Bandolera Adidas Originals",
+    "descuento": 65,
+    "precioOriginal": 55,
+    "precioRebajado": 19,
+    "imagen": "bandolera_adidas_originals.webp"
+  },
+  {
+    "genero": "Hombre",
+    "categoria": "Bolsos",
+    "nombre": "Riñonera Supreme",
+    "descuento": 68,
+    "precioOriginal": 60,
+    "precioRebajado": 19,
+    "imagen": "rinonera_supreme_black.webp"
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Chaquetones",
     "nombre": "Chaquetón The North Face corto",
-    "precio": 60,
-    "precioAnt": 280,
-    "img": "w_northface_black.webp",
-    "genero": "mujer",
-    "categoria": "chaquetones",
-    "colores": ["black", "pink", "white"]
+    "descuento": 79,
+    "precioOriginal": 280,
+    "precioRebajado": 60,
+    "imagen": "w_northface_black.webp"
   },
   {
-    "id": 4,
-    "nombre": "Bolso Guess",
-    "precio": 62.5,
-    "precioAnt": 135,
-    "img": "guess_black.webp",
-    "genero": "mujer",
-    "categoria": "bolsos",
-    "colores": ["black", "blue", "pink", "white"]
+    "genero": "Mujer",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Nike",
+    "descuento": 63,
+    "precioOriginal": 200,
+    "precioRebajado": 75,
+    "imagen": "nike_black.webp"
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Chaquetones",
+    "nombre": "Chaquetón Adidas Originals x Balenciaga",
+    "descuento": 72,
+    "precioOriginal": 250,
+    "precioRebajado": 70,
+    "imagen": "chaqueton_adidas_original_black.webp"
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Camisetas",
+    "nombre": "Camiseta Mujer Ralph Lauren",
+    "descuento": 75,
+    "precioOriginal": 80,
+    "precioRebajado": 20,
+    "imagen": "ralph_women_white.webp"
   }
 ]
-
-
-
