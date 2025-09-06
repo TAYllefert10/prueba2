@@ -1,11 +1,35 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  // Partículas
+  if (typeof tsParticles !== "undefined") {
+    tsParticles.load("tsparticles", {
+      particles: {
+        number: { value: 80, density: { enable: true, area: 800 } },
+        color: { value: "#e63946" },
+        shape: { type: "circle" },
+        opacity: { value: 0.7, random: true },
+        size: { value: 3, random: true },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: "out"
+        }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: "repulse" } }
+      },
+      background: { color: "#000" }
+    });
+  }
+
   const catalogo = document.getElementById("catalogo");
 
   try {
     const response = await fetch("productos.json");
     const productos = await response.json();
 
-    // Agrupar por género y categoría
     const productosPorGenero = {};
 
     productos.forEach(prod => {
@@ -18,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorGenero[prod.genero][prod.categoria].push(prod);
     });
 
-    // Generar catálogo
     for (const genero in productosPorGenero) {
       const seccionDiv = document.createElement("div");
       seccionDiv.className = "seccion";
@@ -40,7 +63,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         grid.className = "productos-grid";
 
         categorias[categoria].forEach(producto => {
-          // Calcular descuento
           const descuento = Math.round(
             ((producto.precioOriginal - producto.precioRebajado) / producto.precioOriginal) * 100
           );
@@ -48,41 +70,30 @@ document.addEventListener("DOMContentLoaded", async () => {
           const card = document.createElement("div");
           card.className = "card";
 
-          // Imagen principal (primera variante)
           const imgPath = `https://tayllefert10.github.io/prueba/images/${producto.colores[0].imagen}`;
+          const imgId = `img-${producto.nombre.replace(/\s+/g, '-').toLowerCase()}`;
 
-          // Generar círculos de color
           const colorOptions = producto.colores.map((color, index) => {
             const isActive = index === 0 ? "active" : "";
             return `
               <div 
                 class="color-option ${isActive}"
-                style="background-image: url('https://tayllefert10.github.io/prueba/images/${color.imagen}'); background-size: cover; background-position: center;"
+                style="background-image: url('https://tayllefert10.github.io/prueba/images/${color.imagen}'); background-size: cover;"
                 data-img="${color.imagen}"
-                data-name="${color.nombre}"
                 title="${color.nombre}"
               ></div>
             `;
           }).join("");
 
           card.innerHTML = `
-            <div style="position: relative;">
+            <div class="img-container">
               <span class="discount-badge">-${descuento}%</span>
-              <div class="img-container">
-                <img 
-                  src="${imgPath}" 
-                  alt="${producto.nombre}" 
-                  id="img-${producto.nombre.replace(/\s+/g, '-').toLowerCase()}"
-                  onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'"
-                >
-              </div>
+              <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
             </div>
             <div class="card-content">
               <h3 class="card-title">${producto.nombre}</h3>
-              ${producto.descripcion ? `<p style='font-size:0.95rem; color:#555; margin-bottom:0.5rem;'>${producto.descripcion}</p>` : ''}
-              <div class="color-selector">
-                ${colorOptions}
-              </div>
+              ${producto.descripcion ? `<p class="card-description">${producto.descripcion}</p>` : ''}
+              <div class="color-selector">${colorOptions}</div>
               <div class="price-container">
                 <span class="price-original">${producto.precioOriginal.toFixed(2)}€</span>
                 <span class="price-discount">${producto.precioRebajado.toFixed(2)}€</span>
@@ -90,17 +101,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `;
 
-          // Añadir eventos a los círculos de color
+          const mainImg = card.querySelector(`#${imgId}`);
           card.querySelectorAll(".color-option").forEach(option => {
             option.addEventListener("click", () => {
-              const imgId = `img-${producto.nombre.replace(/\s+/g, '-').toLowerCase()}`;
-              const mainImg = document.getElementById(imgId);
               const newImg = option.getAttribute("data-img");
-              const newSrc = `https://tayllefert10.github.io/prueba/images/${newImg}`;
-              mainImg.src = newSrc;
-
-              // Actualizar activo
-              card.querySelectorAll(".color-option").forEach(el => {
+              mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
+              
+              option.parentNode.querySelectorAll(".color-option").forEach(el => {
                 el.classList.remove("active");
               });
               option.classList.add("active");
@@ -119,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     catalogo.innerHTML = `
       <div class="seccion">
-        <p style="color: red; font-size: 1.2rem; text-align: center;">
+        <p style="color: #e63946; font-size: 1.2rem; text-align: center; padding: 1rem;">
           ⚠️ Error al cargar productos: ${error.message}
         </p>
       </div>
