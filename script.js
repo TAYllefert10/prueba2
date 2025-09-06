@@ -1,192 +1,49 @@
-// ====== CARGAR PRODUCTOS DESDE JSON ======
-let productos = [];
-const grid = document.getElementById('product-grid');
-const pagination = document.getElementById('pagination');
+document.addEventListener("DOMContentLoaded", async () => {
+  const catalogo = document.getElementById("catalogo");
 
-let currentPage = 1;
-const itemsPerPage = 6;
-let currentFilters = { gender: 'all', category: 'all', search: '' };
+  try {
+    const response = await fetch("productos.json");
+    const productos = await response.json();
 
-fetch('productos.json')
-  .then(response => {
-    if (!response.ok) throw new Error('No se encontró productos.json');
-    return response.json();
-  })
-  .then(data => {
-    productos = data;
-    console.log('✅ Productos cargados:', productos);
-    renderProducts(1);
-  })
-  .catch(error => {
-    console.error('❌ Error:', error);
-    grid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; color: #ff3333; padding: 2rem;">
-        ❌ Error: ${error.message}<br>
-        Asegúrate de que <strong>productos.json</strong> exista.
-      </div>
-    `;
-  });
+    productos.forEach((producto) => {
+      // Calcular descuento (20% por ejemplo)
+      const descuentoPorcentaje = 20;
+      const precioOriginal = producto.precio;
+      const precioRebajado = (precioOriginal * (1 - descuentoPorcentaje / 100)).toFixed(2);
 
-// ====== RENDERIZAR PRODUCTOS ======
-function renderProducts(page = 1) {
-  if (!productos || productos.length === 0) return;
+      // Crear tarjeta
+      const card = document.createElement("div");
+      card.className = "card";
 
-  const filtered = productos.filter(p => {
-    const matchesGender = currentFilters.gender === 'all' || p.genero === currentFilters.gender;
-    const matchesCategory = currentFilters.category === 'all' || p.categoria === currentFilters.category;
-    const matchesSearch = !currentFilters.search || 
-      p.nombre.toLowerCase().includes(currentFilters.search.toLowerCase());
-    return matchesGender && matchesCategory && matchesSearch;
-  });
+      // Badge de descuento
+      const discountBadge = `<div class="discount-badge">-${descuentoPorcentaje}%</div>`;
 
-  const totalPages = Math.ceil(filtered.length / itemsPerPage);
-  currentPage = page > totalPages ? totalPages : page;
+      // Si está fuera de stock
+      let outOfStockOverlay = "";
+      let button = `<button class="btn">Añadir al carrito</button>`;
+      if (producto.stock <= 0) {
+        outOfStockOverlay = `<div class="out-of-stock">AGOTADO</div>`;
+        button = `<button class="btn" disabled>Fuera de stock</button>`;
+      }
 
-  grid.innerHTML = '';
+      card.innerHTML = `
+        ${producto.stock <= 0 ? outOfStockOverlay : ""}
+        ${descuentoPorcentaje > 0 ? discountBadge : ""}
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
+        <div class="card-content">
+          <h3 class="card-title">${producto.nombre}</h3>
+          <p class="card-description">${producto.descripcion}</p>
+          <div class="price-container">
+            <span class="price-original">$${precioOriginal.toFixed(2)}</span>
+            <span class="price-discount">$${precioRebajado}</span>
+          </div>
+          ${button}
+        </div>
+      `;
 
-  const start = (currentPage - 1) * itemsPerPage;
-  const toShow = filtered.slice(start, start + itemsPerPage);
-
-  toShow.forEach(prod => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.dataset.id = prod.id;
-    card.dataset.gender = prod.genero;
-    card.dataset.category = prod.categoria;
-    card.dataset.name = prod.nombre;
-
-    let colorOptions = '';
-    (prod.colores || ['black']).forEach(color => {
-      const imgName = prod.img.replace(/_[^_]+\.webp/, `_${color}.webp`);
-      colorOptions += `
-        <span 
-          class="color-circle" 
-          style="background:${getColorHex(color)}" 
-          onclick="changeColor('img-${prod.id}', '${imgName}')" 
-          title="${color}">
-        </span>`;
+      catalogo.appendChild(card);
     });
-
-    const discount = Math.round((1 - prod.precio / prod.precioAnt) * 100);
-
-    card.innerHTML = `
-      <span class="ribbon">-${discount}%</span>
-      <img id="img-${prod.id}" src="images/${prod.img}" alt="${prod.nombre}">
-      <div class="card-info">
-        <h3>${prod.nombre}</h3>
-        <p class="price"><del>${prod.precioAnt}€</del> <ins>${prod.precio}€</ins></p>
-        <label for="size-${prod.id}" class="label-inline">Talla:</label>
-        <select id="size-${prod.id}">
-          <option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option>
-        </select>
-        <div class="color-options">${colorOptions}</div>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-
-  renderPagination(totalPages);
-}
-
-function renderPagination(totalPages) {
-  pagination.innerHTML = '';
-  if (totalPages <= 1) return;
-
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    btn.className = i === currentPage ? 'active' : '';
-    btn.addEventListener('click', () => renderProducts(i));
-    pagination.appendChild(btn);
+  } catch (error) {
+    catalogo.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: red;">Error al cargar los productos: ${error.message}</p>`;
   }
-}
-
-// ====== FUNCIONES AUXILIARES ======
-function getColorHex(color) {
-  const colors = {
-    black: '#000', white: '#fff', gray: '#808080', darkgray: '#2F2F2F', lightgray: '#D3D3D3',
-    blue: '#0000ff', darkblue: '#00008B', navy: '#000080', lightblue: '#ADD8E6',
-    green: '#008000', darkgreen: '#006400', brown: '#A52A2A', burgundy: '#800000',
-    red: '#ff0000', purple: '#800080', pink: '#FFC0CB', cream: '#F5F5DC', apricot: '#FBCEB1'
-  };
-  return colors[color] || '#000';
-}
-
-window.changeColor = function(imgId, newSrc) {
-  const el = document.getElementById(imgId);
-  if (!el) return;
-  el.src = "images/" + newSrc;
-};
-
-// ====== FILTROS ======
-document.getElementById('searchInput').addEventListener('input', e => {
-  currentFilters.search = e.target.value;
-  currentPage = 1;
-  renderProducts(1);
-});
-
-document.querySelectorAll('.pill').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.dataset.filter;
-    const value = btn.dataset.value;
-    
-    document.querySelectorAll(`.pill[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    currentFilters[filter] = value;
-    currentPage = 1;
-    renderProducts(1);
-  });
-});
-
-// ====== MENÚ DESPLEGABLE ======
-window.toggleDropdown = function(menuId, btnEl) {
-  document.querySelectorAll('.dropdown').forEach(dd => {
-    const content = dd.querySelector('.dropdown-content');
-    if (content && content.id !== menuId) {
-      dd.classList.remove('open');
-    }
-  });
-
-  const parent = btnEl.closest('.dropdown');
-  parent.classList.toggle('open');
-};
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.dropdown')) {
-    document.querySelectorAll('.dropdown').forEach(dd => dd.classList.remove('open'));
-  }
-});
-
-// ====== OTROS ======
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof particlesJS !== 'undefined') {
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.45 },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.25, "width": 1 },
-        "move": { "enable": true, "speed": 2.4, "direction": "none", "straight": false, "out_mode": "out" }
-      },
-      "interactivity": {
-        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-        "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 3 } }
-      },
-      "retina_detect": true
-    });
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting && e.target.classList.add('reveal'));
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.card').forEach(el => observer.observe(el));
-
-  const btnTop = document.getElementById('btnTop');
-  window.addEventListener('scroll', () => {
-    btnTop.style.display = window.scrollY > 400 ? 'block' : 'none';
-  });
-  btnTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
