@@ -101,22 +101,20 @@
       { "nombre": "Negro", "imagen": "adidas_originals_futbol.webp" }
     ]
   },
-  {
-    "genero": "Hombre",
-    "categoria": "Camisetas",
-    "nombre": "Camiseta Hombre The North Face",
-    "descripcion": "Logo bordado en el pecho y en la espalda",
-    "precioOriginal": 45,
-    "precioRebajado": 20,
-    "tallas": "S-3XL",
-    "medidas": "",
-    "colores": [
-      { "nombre": "Negro", "imagen": "tnf_shirt_black.webp" },
-      { "nombre": "Gris oscuro", "imagen": "tnf_shirt_darkgray.webp" },
-      { "nombre": "Azul marino", "imagen": "tnf_shirt_navy.webp" },
-      { "nombre": "Blanco", "imagen": "tnf_shirt_white.webp" }
-    ]
-  },
+ {
+  "genero": "Hombre",
+  "categoria": "Camisetas",
+  "nombre": "Camiseta Hombre The North Face",
+  "descripcion": "Logo bordado en el pecho y en la espalda",
+  "precioOriginal": 45,
+  "precioRebajado": 20,
+  "disponible": false,
+  "tallas": "S-3XL",
+  "medidas": "",
+  "colores": [
+    { "nombre": "Negro", "imagen": "tnf_shirt_black.webp" }
+  ]
+},
   {
     "genero": "Hombre",
     "categoria": "Conjuntos",
@@ -384,3 +382,4 @@
     ]
   }
 ]
+
