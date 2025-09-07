@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
     productos = await response.json();
 
-    // Extraer categorías únicas para el filtro
+    // Extraer categorías únicas
     productos.forEach(p => categoriasUnicas.add(p.categoria));
     const categoriasOrdenadas = [...categoriasUnicas].sort();
 
-    // Llenar el select de categorías
+    // Llenar filtro de categorías
     categoriasOrdenadas.forEach(cat => {
       const option = document.createElement("option");
       option.value = cat;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Función para renderizar productos
     function renderizarProductos(filtroGenero = "", filtroCategoria = "") {
-      catalogo.innerHTML = ""; // Limpiar
+      catalogo.innerHTML = "";
 
       const productosFiltrados = productos.filter(p => {
         const coincideGenero = !filtroGenero || p.genero === filtroGenero;
@@ -37,12 +37,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (productosFiltrados.length === 0) {
         const div = document.createElement("div");
         div.className = "seccion";
-        div.innerHTML = `<p style="color: #aaa; text-align: center; padding: 2rem;">No hay productos que coincidan con los filtros.</p>`;
+        div.innerHTML = `<p style="color: #aaa; text-align: center; padding: 2rem;">No hay productos que coincidan.</p>`;
         catalogo.appendChild(div);
         return;
       }
 
-      // Agrupar por género y categoría
       const productosPorGenero = {};
       productosFiltrados.forEach(prod => {
         if (!productosPorGenero[prod.genero]) productosPorGenero[prod.genero] = {};
@@ -93,6 +92,10 @@ document.addEventListener("DOMContentLoaded", async () => {
               `;
             }).join("");
 
+            // Mostrar tallas o medidas
+            const sizeText = producto.tallas ? `Tallas: ${producto.tallas}` : 
+                           producto.medidas ? `Medidas: ${producto.medidas}` : "";
+
             card.innerHTML = `
               <div class="img-container">
                 <span class="discount-badge">-${descuento}%</span>
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
               <div class="card-content">
                 <h3 class="card-title">${producto.nombre}</h3>
-                ${producto.descripcion ? `<p class="card-description">${producto.descripcion}</p>` : ''}
+                ${sizeText ? `<p class="size-info">${sizeText}</p>` : ''}
                 <div class="color-selector">${colorOptions}</div>
                 <div class="price-container">
                   <span class="price-original">${producto.precioOriginal.toFixed(2)}€</span>
@@ -130,7 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-    // Función para generar ID seguro
+    // Generar ID seguro
     function generarId(nombre) {
       return "img-" + nombre
         .toLowerCase()
