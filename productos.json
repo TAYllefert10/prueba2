@@ -325,8 +325,9 @@
     "precioRebajado": 30,
     "colores": [
       { "nombre": "Negro", "imagen": "Monedero_zadig_black.webp" },
-      { "nombre": "Negro", "imagen": "Monedero_zadig_black2.webp" },
+      { "nombre": "Negro", "imagen": "Monedero_zadig_black2.webp" }
     ]
   }
 ]
+
 
