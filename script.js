@@ -1,66 +1,9 @@
-// Inicializar partículas cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
-  // Configuración de partículas brillantes
-  const particlesOptions = {
-    particles: {
-      number: {
-        value: 80,
-        density: { enable: true, area: 800 }
-      },
-      color: {
-        value: "#e63946" // Rojo vibrante
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 0.7,
-        random: true
-      },
-      size: {
-        value: 3,
-        random: true
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        random: true,
-        straight: false,
-        outModes: "out"
-      }
-    },
-    interactivity: {
-      events: {
-        onHover: {
-          enable: true,
-          mode: "repulse" // Se alejan al pasar el ratón
-        }
-      }
-    },
-    background: {
-      color: "#000"
-    }
-  };
-
-  // Inicializar tsParticles si está disponible
-  if (typeof tsParticles !== "undefined") {
-    try {
-      await tsParticles.load("tsparticles", particlesOptions);
-      console.log("✅ Partículas cargadas correctamente");
-    } catch (error) {
-      console.error("❌ Error al cargar partículas:", error);
-    }
-  } else {
-    console.warn("⚠️ tsParticles no se cargó. Revisa la conexión o el CDN.");
-  }
-
-  // === CARGA DEL CATÁLOGO ===
   const catalogo = document.getElementById("catalogo");
 
   try {
     const response = await fetch("productos.json");
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
     const productos = await response.json();
 
     // Función para generar ID seguro
@@ -130,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.innerHTML = `
             <div class="img-container">
               <span class="discount-badge">-${descuento}%</span>
-              <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.co/200x200?text=No+Image'">
+              <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://picsum.photos/200/200'">
             </div>
             <div class="card-content">
               <h3 class="card-title">${producto.nombre}</h3>
