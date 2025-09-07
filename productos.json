@@ -318,17 +318,18 @@
     ]
   },
   {
-    "genero": "Mujer",
-    "categoria": "Bolsos",
-    "nombre": "Monedero Zadig Voltaire",
-    "precioOriginal": 125,
-    "precioRebajado": 30,
-    "colores": [
-      { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black.webp" },
-      { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black2.webp" }
-    ]
-  }
+  "genero": "Mujer",
+  "categoria": "Bolsos",
+  "nombre": "Monedero Zadig Voltaire",
+  "precioOriginal": 125,
+  "precioRebajado": 30,
+  "colores": [
+    { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black.webp" },
+    { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black2.webp" }
+  ]
+}
 ]
+
 
 
 
