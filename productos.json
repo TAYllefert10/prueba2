@@ -5,6 +5,7 @@
     "nombre": "Chaquetón The North Face 700",
     "precioOriginal": 350,
     "precioRebajado": 65,
+    "disponible": true,
     "tallas": "S-2XL",
     "medidas": "",
     "colores": [
@@ -382,4 +383,5 @@
     ]
   }
 ]
+
 
