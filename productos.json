@@ -335,7 +335,8 @@
     "tallas": "",
     "medidas": "x",
     "colores": [
-      { "nombre": "Negro", "imagen": "Monedero_zadig_black.webp" }
+      { "nombre": "Negro", "imagen": "monedero_zadig_black" },
+      { "nombre": "Negro", "imagen": "monedero_zadig_black2" }
     ]
   },
   {
@@ -412,6 +413,7 @@
     ]
   }
 ]
+
 
 
 
