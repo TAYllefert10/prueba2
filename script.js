@@ -4,19 +4,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   const categoriaFilter = document.getElementById("categoria-filter");
   const clearFilters = document.getElementById("clear-filters");
 
+  // Modal
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeModal = document.getElementById("closeModal");
+  const prevBtn = document.getElementById("prevColor");
+  const nextBtn = document.getElementById("nextColor");
+  const colorIndicators = document.getElementById("colorIndicators");
+
   let productos = [];
   let categoriasUnicas = new Set();
+  let currentProduct = null;
+  let currentIndex = 0;
 
   try {
     const response = await fetch("productos.json");
     if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
     productos = await response.json();
 
-    // Extraer categorías únicas
+    // Extraer categorías
     productos.forEach(p => categoriasUnicas.add(p.categoria));
     const categoriasOrdenadas = [...categoriasUnicas].sort();
 
-    // Llenar filtro de categorías
     categoriasOrdenadas.forEach(cat => {
       const option = document.createElement("option");
       option.value = cat;
@@ -87,6 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                   class="color-option ${isActive}"
                   style="background-image: url('https://tayllefert10.github.io/prueba/images/${color.imagen}'); background-size: cover;"
                   data-img="${color.imagen}"
+                  data-index="${index}"
                   title="${color.nombre}"
                 ></div>
               `;
@@ -99,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             card.innerHTML = `
               <div class="img-container">
                 <span class="discount-badge">-${descuento}%</span>
-                <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://picsum.photos/200/200'">
+                <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" class="main-image" onerror="this.src='https://picsum.photos/300/300'">
               </div>
               <div class="card-content">
                 <h3 class="card-title">${producto.nombre}</h3>
@@ -113,10 +123,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
 
             const mainImg = card.querySelector(`#${imgId}`);
+
+            // Abrir modal al tocar la imagen
+            mainImg.addEventListener("click", () => {
+              openModal(producto, 0);
+            });
+
+            // Selector de color
             card.querySelectorAll(".color-option").forEach(option => {
               option.addEventListener("click", () => {
                 const newImg = option.getAttribute("data-img");
+                const index = parseInt(option.getAttribute("data-index"));
                 mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
+                
                 option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
                 option.classList.add("active");
               });
@@ -141,6 +160,84 @@ document.addEventListener("DOMContentLoaded", async () => {
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "");
     }
+
+    // === MODAL ===
+    function openModal(producto, index) {
+      currentProduct = producto;
+      currentIndex = index;
+      modalImg.src = `https://tayllefert10.github.io/prueba/images/${producto.colores[index].imagen}`;
+      modal.style.display = "block";
+      updateIndicators();
+    }
+
+    function closeModalFn() {
+      modal.style.display = "none";
+      currentProduct = null;
+    }
+
+    function nextImage() {
+      if (currentProduct && currentProduct.colores.length > 1) {
+        currentIndex = (currentIndex + 1) % currentProduct.colores.length;
+        modalImg.src = `https://tayllefert10.github.io/prueba/images/${currentProduct.colores[currentIndex].imagen}`;
+        updateIndicators();
+      }
+    }
+
+    function prevImage() {
+      if (currentProduct && currentProduct.colores.length > 1) {
+        currentIndex = (currentIndex - 1 + currentProduct.colores.length) % currentProduct.colores.length;
+        modalImg.src = `https://tayllefert10.github.io/prueba/images/${currentProduct.colores[currentIndex].imagen}`;
+        updateIndicators();
+      }
+    }
+
+    function updateIndicators() {
+      colorIndicators.innerHTML = "";
+      currentProduct.colores.forEach((color, index) => {
+        const indicator = document.createElement("div");
+        indicator.className = `indicator ${index === currentIndex ? 'active' : 'inactive'}`;
+        indicator.addEventListener("click", () => {
+          currentIndex = index;
+          modalImg.src = `https://tayllefert10.github.io/prueba/images/${color.imagen}`;
+          updateIndicators();
+        });
+        colorIndicators.appendChild(indicator);
+      });
+    }
+
+    // Eventos del modal
+    closeModal.addEventListener("click", closeModalFn);
+    prevBtn.addEventListener("click", prevImage);
+    nextBtn.addEventListener("click", nextImage);
+
+    // Cerrar con ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModalFn();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    });
+
+    // Touch events para swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    modalImg.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    modalImg.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextImage();
+        else prevImage();
+      }
+    }, { passive: true });
+
+    // Cerrar modal al hacer clic fuera de la imagen
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModalFn();
+    });
 
     // Eventos de filtro
     generoFilter.addEventListener("change", () => {
