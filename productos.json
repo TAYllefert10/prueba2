@@ -119,9 +119,9 @@
   "tallas": "S-3XL",
   "medidas": "",
   "colores": [
-    { "nombre": "Negro", "imagen": "tnf_shirt_black.webp" }
-        { "nombre": "Negro", "imagen": "tnf_shirt_darkgray.webp" }
-        { "nombre": "Negro", "imagen": "tnf_shirt_navy.webp" }
+    { "nombre": "Negro", "imagen": "tnf_shirt_black.webp" },
+        { "nombre": "Negro", "imagen": "tnf_shirt_darkgray.webp" },
+        { "nombre": "Negro", "imagen": "tnf_shirt_navy.webp" },
         { "nombre": "Negro", "imagen": "tnf_shirt_white.webp" }
   ]
 },
@@ -412,6 +412,7 @@
     ]
   }
 ]
+
 
 
 
