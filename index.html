@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo - Edición Premium</title>
+  <title>Catálogo Oficial - Partículas Activas</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.min.js"></script>
 </head>
 <body>
-  <!-- Fondo de partículas -->
-  <div id="tsparticles"></div>
+  <!-- FONDO DE PARTÍCULAS -->
+  <div id="tsparticles" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
   <header>
     <h1>🖤 CATÁLOGO PREMIUM</h1>
@@ -26,6 +24,8 @@
     <p>&copy; 2025 Tu Marca. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- Cargar tsParticles desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/dist/tsparticles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
