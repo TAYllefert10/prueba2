@@ -15,7 +15,27 @@
     <h1>🖤 CATÁLOGO PREMIUM</h1>
     <p>Descuentos exclusivos – Selección de color disponible</p>
   </header>
+<!-- Filtros -->
+<div class="filters">
+  <div class="filter-group">
+    <label for="genero-filter">Género</label>
+    <select id="genero-filter">
+      <option value="">Todos</option>
+      <option value="Hombre">Hombre</option>
+      <option value="Mujer">Mujer</option>
+    </select>
+  </div>
 
+  <div class="filter-group">
+    <label for="categoria-filter">Categoría</label>
+    <select id="categoria-filter">
+      <option value="">Todas</option>
+      <!-- Se llenará dinámicamente -->
+    </select>
+  </div>
+
+  <button id="clear-filters">Limpiar filtros</button>
+</div>
   <main id="catalogo">
     <!-- Productos generados dinámicamente -->
   </main>
