@@ -324,11 +324,12 @@
     "precioOriginal": 125,
     "precioRebajado": 30,
     "colores": [
-      { "nombre": "Negro", "imagen": "Monedero_zadig_voltaire_black.webp" },
-      { "nombre": "Negro", "imagen": "Monedero_zadig_voltaire_black2.webp" }
+      { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black.webp" },
+      { "nombre": "Negro", "imagen": "monedero_zadig_voltaire_black2.webp" }
     ]
   }
 ]
+
 
 
 
