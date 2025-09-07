@@ -421,3 +421,41 @@ footer {
 .color-indicators .inactive {
   background: rgba(255, 255, 255, 0.3);
 }
+/* === PRODUCTO AGOTADO === */
+.card.out-of-stock {
+  opacity: 0.5;
+  filter: grayscale(80%);
+  pointer-events: none;
+  cursor: not-allowed;
+  background: #1a1a1a;
+  border: 1px dashed #555;
+  transform: none !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card.out-of-stock .discount-badge {
+  background: #999;
+  opacity: 0.8;
+}
+
+.card.out-of-stock .price-original,
+.card.out-of-stock .price-discount {
+  color: #999;
+}
+
+.out-of-stock::before {
+  content: "AGOTADO";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 0;
+  z-index: 3;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
