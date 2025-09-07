@@ -316,5 +316,17 @@
       { "nombre": "Rosa", "imagen": "guess_pink.webp" },
       { "nombre": "Blanco", "imagen": "guess_white.webp" }
     ]
+  },
+  {
+    "genero": "Mujer",
+    "categoria": "Bolsos",
+    "nombre": "Monedero Zadig and Voltaire",
+    "precioOriginal": 125,
+    "precioRebajado": 30,
+    "colores": [
+      { "nombre": "Negro", "imagen": "Monedero_zadig_black.webp" },
+      { "nombre": "Negro", "imagen": "Monedero_zadig_black2.webp" },
+    ]
   }
 ]
+
