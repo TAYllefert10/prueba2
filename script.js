@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImage");
   const closeModal = document.getElementById("closeModal");
-  const prevBtn = document.getElementById("prevColor");
-  const nextBtn = document.getElementById("nextColor");
+  const prevBtn = document.getElementById("nextColor");
+  const nextBtn = document.getElementById("prevColor");
   const colorIndicators = document.getElementById("colorIndicators");
 
   let productos = [];
@@ -121,46 +121,30 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
-// === CONTROL DE STOCK ===
-if (!producto.disponible) {
-  card.classList.add("out-of-stock");
-} else {
-  // Solo si está disponible, añadir eventos
-  mainImg.parentElement.addEventListener("click", () => {
-    openModal(producto, 0);
-  });
 
-  card.querySelectorAll(".color-option").forEach(option => {
-    option.addEventListener("click", () => {
-      const newImg = option.getAttribute("data-img");
-      const index = parseInt(option.getAttribute("data-index"));
-      mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
-      option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
-      option.classList.add("active");
-    });
-  });
-}
-
-// Añadir tarjeta al grid
-grid.appendChild(card);
+            // ✅ Declarar mainImg DESPUÉS de innerHTML
             const mainImg = card.querySelector(`#${imgId}`);
 
-            // Abrir modal al tocar la imagen
-            mainImg.addEventListener("click", () => {
-              openModal(producto, 0);
-            });
-
-            // Selector de color
-            card.querySelectorAll(".color-option").forEach(option => {
-              option.addEventListener("click", () => {
-                const newImg = option.getAttribute("data-img");
-                const index = parseInt(option.getAttribute("data-index"));
-                mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
-                
-                option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
-                option.classList.add("active");
+            // === CONTROL DE STOCK ===
+            if (!producto.disponible) {
+              card.classList.add("out-of-stock");
+              // No añadir eventos si está agotado
+            } else {
+              // Solo si está disponible, añadir eventos
+              mainImg.parentElement.addEventListener("click", () => {
+                openModal(producto, 0);
               });
-            });
+
+              card.querySelectorAll(".color-option").forEach(option => {
+                option.addEventListener("click", () => {
+                  const newImg = option.getAttribute("data-img");
+                  const index = parseInt(option.getAttribute("data-index"));
+                  mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
+                  option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
+                  option.classList.add("active");
+                });
+              });
+            }
 
             grid.appendChild(card);
           });
@@ -231,23 +215,20 @@ grid.appendChild(card);
     prevBtn.addEventListener("click", prevImage);
     nextBtn.addEventListener("click", nextImage);
 
-    // Cerrar con ESC
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModalFn();
       if (e.key === "ArrowRight") nextImage();
       if (e.key === "ArrowLeft") prevImage();
     });
 
-    // Touch events para swipe
+    // Touch events
     let touchStartX = 0;
-    let touchEndX = 0;
-
     modalImg.addEventListener("touchstart", (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     modalImg.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
+      const touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
         if (diff > 0) nextImage();
@@ -255,7 +236,6 @@ grid.appendChild(card);
       }
     }, { passive: true });
 
-    // Cerrar modal al hacer clic fuera de la imagen
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModalFn();
     });
@@ -288,4 +268,3 @@ grid.appendChild(card);
     `;
   }
 });
-
