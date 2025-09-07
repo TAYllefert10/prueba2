@@ -398,8 +398,8 @@
   },
   {
     "genero": "Mujer",
-    "categoria": "Vestidos",
-    "nombre": "Vestido Guess",
+    "categoria": "Bolsos",
+    "nombre": "Bolso Guess",
     "precioOriginal": 62.5,
     "precioRebajado": 43.82,
         "disponible": true,
@@ -413,6 +413,7 @@
     ]
   }
 ]
+
 
 
 
