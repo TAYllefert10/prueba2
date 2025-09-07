@@ -121,7 +121,28 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
+// === CONTROL DE STOCK ===
+if (!producto.disponible) {
+  card.classList.add("out-of-stock");
+} else {
+  // Solo si está disponible, añadir eventos
+  mainImg.parentElement.addEventListener("click", () => {
+    openModal(producto, 0);
+  });
 
+  card.querySelectorAll(".color-option").forEach(option => {
+    option.addEventListener("click", () => {
+      const newImg = option.getAttribute("data-img");
+      const index = parseInt(option.getAttribute("data-index"));
+      mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
+      option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
+      option.classList.add("active");
+    });
+  });
+}
+
+// Añadir tarjeta al grid
+grid.appendChild(card);
             const mainImg = card.querySelector(`#${imgId}`);
 
             // Abrir modal al tocar la imagen
@@ -267,3 +288,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 });
+
