@@ -1,42 +1,75 @@
+// Inicializar partículas cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
-  // Partículas
-  if (typeof tsParticles !== "undefined") {
-    tsParticles.load("tsparticles", {
-      particles: {
-        number: { value: 80, density: { enable: true, area: 800 } },
-        color: { value: "#e63946" },
-        shape: { type: "circle" },
-        opacity: { value: 0.7, random: true },
-        size: { value: 3, random: true },
-        move: {
+  // Configuración de partículas brillantes
+  const particlesOptions = {
+    particles: {
+      number: {
+        value: 80,
+        density: { enable: true, area: 800 }
+      },
+      color: {
+        value: "#e63946" // Rojo vibrante
+      },
+      shape: {
+        type: "circle"
+      },
+      opacity: {
+        value: 0.7,
+        random: true
+      },
+      size: {
+        value: 3,
+        random: true
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: "out"
+      }
+    },
+    interactivity: {
+      events: {
+        onHover: {
           enable: true,
-          speed: 2,
-          direction: "none",
-          random: true,
-          straight: false,
-          outModes: "out"
+          mode: "repulse" // Se alejan al pasar el ratón
         }
-      },
-      interactivity: {
-        events: { onHover: { enable: true, mode: "repulse" } }
-      },
-      background: { color: "#000" }
-    });
+      }
+    },
+    background: {
+      color: "#000"
+    }
+  };
+
+  // Inicializar tsParticles si está disponible
+  if (typeof tsParticles !== "undefined") {
+    try {
+      await tsParticles.load("tsparticles", particlesOptions);
+      console.log("✅ Partículas cargadas correctamente");
+    } catch (error) {
+      console.error("❌ Error al cargar partículas:", error);
+    }
+  } else {
+    console.warn("⚠️ tsParticles no se cargó. Revisa la conexión o el CDN.");
   }
 
+  // === CARGA DEL CATÁLOGO ===
   const catalogo = document.getElementById("catalogo");
 
   try {
     const response = await fetch("productos.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const productos = await response.json();
 
-    // Función para generar un ID seguro
+    // Función para generar ID seguro
     function generarId(nombre) {
       return "img-" + nombre
         .toLowerCase()
-        .replace(/[^a-z0-9]/g, "-")  // Reemplaza todo lo que no sea letra o número por "-"
-        .replace(/-+/g, "-")          // Elimina múltiples guiones seguidos
-        .replace(/^-|-$/g, "");       // Elimina guiones al inicio o final
+        .replace(/[^a-z0-9]/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
     }
 
     const productosPorGenero = {};
@@ -80,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.className = "card";
 
           const imgPath = `https://tayllefert10.github.io/prueba/images/${producto.colores[0].imagen}`;
-          const imgId = generarId(producto.nombre); // ID seguro
+          const imgId = generarId(producto.nombre);
 
           const colorOptions = producto.colores.map((color, index) => {
             const isActive = index === 0 ? "active" : "";
@@ -97,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.innerHTML = `
             <div class="img-container">
               <span class="discount-badge">-${descuento}%</span>
-              <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+              <img id="${imgId}" src="${imgPath}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.co/200x200?text=No+Image'">
             </div>
             <div class="card-content">
               <h3 class="card-title">${producto.nombre}</h3>
@@ -110,17 +143,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `;
 
-          // Asignar evento después de insertar el HTML
           const mainImg = card.querySelector(`#${imgId}`);
           card.querySelectorAll(".color-option").forEach(option => {
             option.addEventListener("click", () => {
               const newImg = option.getAttribute("data-img");
               mainImg.src = `https://tayllefert10.github.io/prueba/images/${newImg}`;
-              
-              // Actualizar estado activo
-              option.parentNode.querySelectorAll(".color-option").forEach(el => {
-                el.classList.remove("active");
-              });
+              option.parentNode.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
               option.classList.add("active");
             });
           });
