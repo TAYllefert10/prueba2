@@ -299,7 +299,7 @@ footer {
 
 .card img {
   max-width: 95%;
-  max-height: 250px; /* Más grande */
+  max-height: 350px; /* Más grande */
   object-fit: contain;
   filter: brightness(1.05);
   transition: transform 0.3s ease;
