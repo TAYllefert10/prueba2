@@ -248,7 +248,7 @@
   {
     "genero": "Mujer",
     "categoria": "Bolsos",
-    "nombre": "Bolso Zadig & Voltaire",
+    "nombre": "Bolso Zadig Voltaire",
     "precioOriginal": 150,
     "precioRebajado": 55,
     "colores": [
@@ -257,17 +257,6 @@
       { "nombre": "Verde", "imagen": "bolso_zadig_green.webp" },
       { "nombre": "Rojo", "imagen": "bolso_zadig_red.webp" },
       { "nombre": "Blanco", "imagen": "bolso_zadig_white.webp" }
-    ]
-  },
-  {
-    "genero": "Mujer",
-    "categoria": "Bolsos",
-    "nombre": "Monedero Zadig",
-    "precioOriginal": 40,
-    "precioRebajado": 15,
-    "colores": [
-      { "nombre": "Negro", "imagen": "Monedero_zadig_black.webp" },
-      { "nombre": "Negro", "imagen": "Monedero_zadig_black2.webp" }
     ]
   },
   {
@@ -317,7 +306,7 @@
   },
   {
     "genero": "Mujer",
-    "categoria": "bolsos",
+    "categoria": "Bolsos",
     "nombre": "Bolso Guess",
     "precioOriginal": 110,
     "precioRebajado": 40,
